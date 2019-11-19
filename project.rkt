@@ -4,22 +4,22 @@
 ;ejercicio 1
 ;li y lf representan los limites en los que se desea evaluar la funcion integrada
 ;Si queremos integrar 5
-;Ejemplo input es (integral 5 li lf)
+;a)Ejemplo input es (integral 5 li lf)
 
 ;Si queremos integrar X
-;Ejemplo input es (integral 'x li lf)
+;b)Ejemplo input es (integral 'x li lf)
 
 ;Si queremos integrar X^3
-;Ejemplo input es (integral '((1 3)) li lf)
+;c)Ejemplo input es (integral '((1 3)) li lf)
 
 ;Si queremos integrar 5*X^3 + 4*X^2 + 3*X^1
-;Ejemplo input es (integral '((5 3) (4 2) (3 1)) li lf)
+;d)e)f)g)h)Ejemplo input es (integral '((5 3) (4 2) (3 1)) li lf)
 
 ;Si queremos integrar 5^x
-;Ejemplo input es (integral '((5 'x)) li lf)
+;i)Ejemplo input es (integral '((5 'x)) li lf)
 
 ;Si queremos integrar 5^(x^3)
-;Ejemplo de input es (integral '((5 ('((1 3))))) li lf)
+;Ejemplo de input es (integral '((5 ('((1 3))))) 2 1)
 
 (define (integral L ma men)
   (cond
@@ -31,8 +31,6 @@
           (display (number->string (- (evaluar-int L ma) (evaluar-int L men))))
           ])
   )
-
-;(string-append  (number->string (first (first L))))
 
 (define (mostrar-int L)
   (cond
@@ -58,7 +56,7 @@
     [(empty? L) 0]
     [(number? L) (* L x)]
     [(equal? L 'x) (/ (expt x 2) 2)]
-    [(equal? (second (first L)) ''x) (/ (expt (first(first L) x) (log (first (first L)))))]
+    [(equal? (second (first L)) ''x) (/ (expt (first(first L)) x) (log (first (first L))))]
     [(list? (second (first L))) (display (mostrar-int (second (first L))))]
     [else
      (+ (/ (* (first (first L)) (expt x (+ (second (first L)) 1))) (+ (second (first L)) 1)) (evaluar-int (rest L) x))
