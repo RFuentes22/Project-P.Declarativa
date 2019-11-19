@@ -65,6 +65,35 @@
  )
   
 
+;version 2 integrar -----------------
+(define (integrar L)
+(cond
+ ((empty? L) (display "c"))
+ ((number? L) (display (string-append "Integral = " (number->string L) "x")))
+ ((equal? L '(x)) (display "(x^2)/2"))
+ ((and (equal? '* (first L)) (equal? (length L) 3) (equal? 'x (third L) )) (display (string-append "Integral = " (number->string (second L)) "x^2/2")))
+ ((and (equal? '* (first L)) (equal? (length L) 3) (equal? 'expt (first (third L)))) (integrarxn L) )
+ ((and (equal? '* (first L)) (equal? 'expt (first (second L)))) (integrarxn L) )
+ )
+)
+
+(define (integrarxn L)
+  (cond
+     ((equal? (length L) 3) (display (string-append "Integral = " (number->string (second L)) "x^"  (number->string (+ (third (third L)) 1) ) "/" (number->string (+ (third (third L)) 1) ) )))
+     ((equal? (length L) 2) (display (string-append "Integral = " "x^"  (number->string (+ (third (second L)) 1) ) "/" (number->string (+ (third (second L)) 1) ) )))
+
+  )
+  
+  )
+
+;(integrar '(* 2 x))
+;(integrar '(* (expt x 2)))
+;(integrar '(* 2 (expt x 2)))
+
+
+
+
+;Ejercicio 3
 ;ecuacion recta
 ;(findEq '(x1 y1) '(x2 y2) numaevaluar)
 ;(findEq '(4 6) '(2 2) 6)
