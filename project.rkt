@@ -74,21 +74,31 @@
  ((and (equal? '* (first L)) (equal? (length L) 3) (equal? 'x (third L) )) (display (string-append "Integral = " (number->string (second L)) "x^2/2")))
  ((and (equal? '* (first L)) (equal? (length L) 3) (equal? 'expt (first (third L)))) (integrarxn L) )
  ((and (equal? '* (first L)) (equal? 'expt (first (second L)))) (integrarxn L) )
+ ((and (equal? '+ (first L)) (equal? (length L) 3) (equal? 'expt (first (second L)))) (integrar2 (second L) (third L) "s") )
+ ((and (equal? '- (first L)) (equal? (length L) 3) (equal? 'expt (first (second L)))) (integrar2 (second L) (third L) "r") )
+ 
  )
 )
 
 (define (integrarxn L)
   (cond
-     ((equal? (length L) 3) (display (string-append "Integral = " (number->string (second L)) "x^"  (number->string (+ (third (third L)) 1) ) "/" (number->string (+ (third (third L)) 1) ) )))
+     ((and (equal? (length L) 3) (number? (second L))) (display (string-append "Integral = " (number->string (second L)) "x^"  (number->string (+ (third (third L)) 1) ) "/" (number->string (+ (third (third L)) 1) ) )))
      ((equal? (length L) 2) (display (string-append "Integral = " "x^"  (number->string (+ (third (second L)) 1) ) "/" (number->string (+ (third (second L)) 1) ) )))
+  )
+)
+
+(define (integrar2 L A S) 
+(cond
+     ((and (equal? (length L) 3) (equal? (length A) 3) (equal? S "s")) (display (string-append "Integral = " "x^"  (number->string (+ (third L) 1) ) "/" (number->string (+ (third L) 1) ) " + x^" (number->string (+ (third A) 1) ) "/" (number->string (+ (third A) 1) ) ))) ;u+v
+     ((and (equal? (length L) 3) (equal? (length A) 3) (equal? S "r")) (display (string-append "Integral = " "x^"  (number->string (+ (third L) 1) ) "/" (number->string (+ (third L) 1) ) " - x^" (number->string (+ (third A) 1) ) "/" (number->string (+ (third A) 1) ) ))) ;u-v
 
   )
-  
-  )
+)
 
 ;(integrar '(* 2 x))
 ;(integrar '(* (expt x 2)))
 ;(integrar '(* 2 (expt x 2)))
+;(integrar '(+ (expt x 2) (expt x 3)))
 
 
 ;2
